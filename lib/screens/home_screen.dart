@@ -1,3 +1,4 @@
+import 'package:fake_store_app/screens/all_categories_screen.dart';
 import 'package:fake_store_app/screens/product_details.dart';
 import 'package:fake_store_app/services/api_services.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,21 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.pinkAccent,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const AllCategoryScreen(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.view_list_outlined,
+            ),
+          )
+        ],
       ),
       body: FutureBuilder(
         future: ApiService().getAllProducts(),

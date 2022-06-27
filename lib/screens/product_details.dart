@@ -23,6 +23,7 @@ class ProductDetails extends StatelessWidget {
             return Padding(
               padding: basePadding,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
                     height: 10,
@@ -37,9 +38,46 @@ class ProductDetails extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      '\$${snapshot.data['price'].toString()}',
+                      snapshot.data['title'],
                       style: Theme.of(context).textTheme.headline6,
+                      textAlign: TextAlign.justify,
                     ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Chip(
+                        label: Text(
+                          snapshot.data['category'],
+                          style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    color: Colors.white,
+                                  ),
+                        ),
+                        backgroundColor: Colors.pinkAccent,
+                      ),
+                      Text(
+                        '\$${snapshot.data['price'].toString()}',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Description',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    snapshot.data['description'],
+                    textAlign: TextAlign.justify,
                   ),
                 ],
               ),
@@ -51,6 +89,13 @@ class ProductDetails extends StatelessWidget {
           }
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add_shopping_cart_outlined),
+        onPressed: (){},
+        backgroundColor: Colors.pinkAccent,
+      ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
