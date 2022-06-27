@@ -1,10 +1,10 @@
 # fake_store_app
 
-A new Flutter project.
+Working with Restful API
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is an implementation of Restful API.
 
 A few resources to get you started if this is your first Flutter project:
 
