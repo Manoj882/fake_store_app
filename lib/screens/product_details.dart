@@ -22,64 +22,66 @@ class ProductDetails extends StatelessWidget {
           if (snapshot.hasData) {
             return Padding(
               padding: basePadding,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Image.network(
-                    snapshot.data['image'],
-                    height: 200,
-                    width: double.infinity,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                    child: Text(
-                      snapshot.data['title'],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Image.network(
+                      snapshot.data['image'],
+                      height: 200,
+                      width: double.infinity,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                      child: Text(
+                        snapshot.data['title'],
+                        style: Theme.of(context).textTheme.headline6,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Chip(
+                          label: Text(
+                            snapshot.data['category'],
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      color: Colors.white,
+                                    ),
+                          ),
+                          backgroundColor: Colors.pinkAccent,
+                        ),
+                        Text(
+                          '\$${snapshot.data['price'].toString()}',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Description',
                       style: Theme.of(context).textTheme.headline6,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      snapshot.data['description'],
                       textAlign: TextAlign.justify,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Chip(
-                        label: Text(
-                          snapshot.data['category'],
-                          style:
-                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Colors.white,
-                                  ),
-                        ),
-                        backgroundColor: Colors.pinkAccent,
-                      ),
-                      Text(
-                        '\$${snapshot.data['price'].toString()}',
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Description',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    snapshot.data['description'],
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           } else {
