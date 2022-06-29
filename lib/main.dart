@@ -1,3 +1,4 @@
+import 'package:fake_store_app/screens/all_fruits_screen.dart';
 import 'package:fake_store_app/screens/home_screen.dart';
 import 'package:fake_store_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,9 @@ class MyApp extends StatelessWidget {
         
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      // home: LoginScreen(),
+      // home: HomeScreen(),
+      home: const AllFruitScreen(),
     );
   }
 }

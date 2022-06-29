@@ -1,3 +1,4 @@
+import 'package:fake_store_app/models/product_model.dart';
 import 'package:fake_store_app/screens/all_categories_screen.dart';
 import 'package:fake_store_app/screens/cart_screen.dart';
 import 'package:fake_store_app/screens/product_details.dart';
@@ -49,24 +50,25 @@ class HomeScreen extends StatelessWidget {
             return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
+                ProductModel product = snapshot.data[index];
                 return ListTile(
                   leading: Image.network(
-                    snapshot.data[index]['image'],
+                    product.image,
                     height: 50,
                     width: 50,
                   ),
                   title: Text(
-                    snapshot.data[index]['title'],
+                    product.title,
                   ),
                   subtitle: Text(
-                    "Price - \$${snapshot.data[index]['price'].toString()}",
+                    "Price - \$${product.price.toString()}",
                   ),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) => ProductDetails(
-                          id: snapshot.data[index]['id'],
+                          id: product.id,
                         ),
                       ),
                     );

@@ -1,3 +1,4 @@
+import 'package:fake_store_app/models/product_model.dart';
 import 'package:fake_store_app/services/api_services.dart';
 import 'package:flutter/material.dart';
 
@@ -26,17 +27,27 @@ class CartScreen extends StatelessWidget {
                       .getSingleProduct(products[index]['productId']),
                   builder: (context, AsyncSnapshot asyncSnapshot) {
                     if (asyncSnapshot.hasData) {
+                      ProductModel product = asyncSnapshot.data;
                       return ListTile(
-                        title: Text(asyncSnapshot.data['title']),
+                        title: Text(product.title),
                         leading: Image.network(
-                          asyncSnapshot.data['image'],
+                          product.image,
                           height: 50,
                           width: 50,
                         ),
                         subtitle: Text(
                             'Quantity - ${snapshot.data['quantity'].toString()}'),
                         trailing: IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await ApiService().deleteCart('1');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Text('Product deleted successfulluy!!!'),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+                          },
                           icon: const Icon(
                             Icons.delete_outlined,
                             color: Colors.red,
@@ -65,8 +76,8 @@ class CartScreen extends StatelessWidget {
           child: Text(
             'Order Now',
             style: Theme.of(context).textTheme.headline6!.copyWith(
-              color: Colors.white,
-            ),
+                  color: Colors.white,
+                ),
           ),
         ),
       ),

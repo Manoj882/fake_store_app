@@ -63,11 +63,13 @@ class LoginScreen extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                              'Login Success! Your Token id is: ${getToken['token']}'),
+                            'Login Success! Your Token id is: ${getToken['token']}',
+                            
+                          ),
                           backgroundColor: Colors.green,
                         ),
                       );
-                      Future.delayed(Duration(seconds: 2), () {
+                      Future.delayed(const Duration(seconds: 1), () {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -76,12 +78,14 @@ class LoginScreen extends StatelessWidget {
                         );
                       });
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Username or Password is Incorrect'),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
+                      
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text('Username or Password is an Incorrect'),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
                       
                     }
                   },

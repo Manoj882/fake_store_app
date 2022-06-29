@@ -1,4 +1,5 @@
 import 'package:fake_store_app/constants/constant.dart';
+import 'package:fake_store_app/models/product_model.dart';
 import 'package:fake_store_app/services/api_services.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class ProductDetails extends StatelessWidget {
         future: ApiService().getSingleProduct(id),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
+            ProductModel product = snapshot.data;
             return Padding(
               padding: basePadding,
               child: SingleChildScrollView(
@@ -30,7 +32,7 @@ class ProductDetails extends StatelessWidget {
                       height: 10,
                     ),
                     Image.network(
-                      snapshot.data['image'],
+                      product.image,
                       height: 200,
                       width: double.infinity,
                     ),
@@ -39,7 +41,7 @@ class ProductDetails extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        snapshot.data['title'],
+                        product.title,
                         style: Theme.of(context).textTheme.headline6,
                         textAlign: TextAlign.justify,
                       ),
@@ -52,7 +54,7 @@ class ProductDetails extends StatelessWidget {
                       children: [
                         Chip(
                           label: Text(
-                            snapshot.data['category'],
+                            product.category,
                             style:
                                 Theme.of(context).textTheme.bodyText1!.copyWith(
                                       color: Colors.white,
@@ -61,7 +63,7 @@ class ProductDetails extends StatelessWidget {
                           backgroundColor: Colors.pinkAccent,
                         ),
                         Text(
-                          '\$${snapshot.data['price'].toString()}',
+                          '\$${product.price.toString()}',
                           style: Theme.of(context).textTheme.headline6,
                         ),
                       ],
@@ -77,7 +79,7 @@ class ProductDetails extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      snapshot.data['description'],
+                      product.description,
                       textAlign: TextAlign.justify,
                     ),
                   ],
@@ -92,11 +94,20 @@ class ProductDetails extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add_shopping_cart_outlined),
-        onPressed: (){},
+        child: Icon(
+          Icons.add_shopping_cart_outlined,
+        ),
+        onPressed: () async {
+          await ApiService().updateCart(1, id);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Product added to Cart'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        },
         backgroundColor: Colors.pinkAccent,
       ),
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
